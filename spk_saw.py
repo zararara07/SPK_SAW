@@ -55,11 +55,7 @@ class SAW_HP_Selection:
                     normalized_df[criterion] = values / max_val
             elif crit_type == 'cost':
                 min_val = values.min()
-                if min_val == 0: # Hindari pembagian dengan nol jika min_val 0 dan ada nilai non-nol
-                    # Ini adalah kasus yang tricky. Jika min_val 0, dan ada nilai lain > 0,
-                    # maka nilai 0 akan menjadi tak terbatas jika dibagi 1/0.
-                    # Asumsi: jika min_val 0, dan ada nilai lain, kita bisa menganggapnya 1.
-                    # Atau, jika semua 0, hasilnya 1 (terbaik).
+                if min_val == 0: 
                     normalized_df[criterion] = values.apply(lambda x: min_val / x if x != 0 else 1)
                 else:
                     normalized_df[criterion] = min_val / values
